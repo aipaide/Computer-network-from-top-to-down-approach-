@@ -15,12 +15,8 @@ while True:
     try:
         message = connectionSocket.recv(1024)
         print("recieving message %s" % message)
-        if not message:
-            filename=" "
-        else:
-            filename = message.split(b" ")[1]
+        filename = message.split(b" ")[1]
         f = open(filename[1:])
-        size=os.path.getsize(filename[1:])
         status_line="HTTP/1.1 200 OK\r\n"
         body=f.read()
         header_line="Content-Type: text/html\r\nContent-Length: %s\r\nConnection: close\r\n" % len(body)
